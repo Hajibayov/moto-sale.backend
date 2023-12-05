@@ -7,10 +7,10 @@ namespace motosale.user.backend.Infrastructure.Repository
 {
     public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly ReservaDbContext _dbContext;
+        private readonly MotoSaleDbContext _dbContext;
         private readonly DbSet<TEntity> _entity;
 
-        public BaseRepository(ReservaDbContext context)
+        public BaseRepository(MotoSaleDbContext context)
         {
             _dbContext = context;
             _entity = _dbContext.Set<TEntity>();

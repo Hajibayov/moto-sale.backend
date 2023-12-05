@@ -4,16 +4,17 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using billkill.payment.service.Models;
+using moto.sale.user.backend.Models;
 
 namespace motosale.user.backend.Infrastructure
 {
-    public class ReservaDbContext: IdentityDbContext<USER, USER_ROLE, int>
+    public class MotoSaleDbContext: IdentityDbContext<USER, USER_ROLE, int>
     {
-        public ReservaDbContext()
+        public MotoSaleDbContext()
         {
         }
 
-        public ReservaDbContext(DbContextOptions<ReservaDbContext> options)
+        public MotoSaleDbContext(DbContextOptions<MotoSaleDbContext> options)
            : base(options)
         {
         }
@@ -36,6 +37,13 @@ namespace motosale.user.backend.Infrastructure
         public DbSet<USER> user { get; set; }
         public DbSet<USER_ROLE> user_role { get; set; }
         public DbSet<CLIENT> client { get; set; }
-        public DbSet<COMPANY_EMPLOYEE> company_employee { get; set; }
+        public DbSet<PRODUCT> product { get; set; }
+        public DbSet<BRAND> brand { get; set; }
+        public DbSet<BLOG> blog { get; set; }
+        public DbSet<CATEGORY> category { get; set; }
+        public DbSet<EMPLOYEE> employee { get; set; }
+        public DbSet<STATIC_DATA> static_data { get; set; }
+
+
     }
 }

@@ -12,8 +12,8 @@ namespace motosale.user.backend.Extensions
         public MappingEntity()
         {
             CreateMap<STATIC_DATA, StaticVM>().ReverseMap();
-            CreateMap<COMPANY_EMPLOYEE, CompanyEmployeeDto>().ReverseMap();
-            CreateMap<COMPANY_EMPLOYEE, CompanyEmployeeVM>().ReverseMap();
+            //CreateMap<COMPANY_EMPLOYEE, CompanyEmployeeDto>().ReverseMap();
+            //CreateMap<COMPANY_EMPLOYEE, CompanyEmployeeVM>().ReverseMap();
 
   
 

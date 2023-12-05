@@ -37,13 +37,13 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
-builder.Services.AddDbContext<ReservaDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<MotoSaleDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<USER, USER_ROLE>(options =>
 {
 
 })
 .AddRoles<USER_ROLE>()
-.AddEntityFrameworkStores<ReservaDbContext>()
+.AddEntityFrameworkStores<MotoSaleDbContext>()
 .AddDefaultTokenProviders();
 
 //Logs
