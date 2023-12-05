@@ -42,7 +42,6 @@ namespace motosale.user.backend.Infrastructure
         public DbSet<BLOG> blog { get; set; }
         public DbSet<CATEGORY> category { get; set; }
         public DbSet<EMPLOYEE> employee { get; set; }
-        public DbSet<STATIC_DATA> static_data { get; set; }
 
 
     }

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using moto.sale.user.backend.DTO.RequestModels;
+using moto.sale.user.backend.Models;
 using motosale.user.backend.DTO.HelperModels.Jwt;
 using motosale.user.backend.DTO.RequestModels;
 using motosale.user.backend.DTO.RequestModels.Auth;
@@ -11,13 +13,12 @@ namespace motosale.user.backend.Extensions
     {
         public MappingEntity()
         {
-            CreateMap<STATIC_DATA, StaticVM>().ReverseMap();
             //CreateMap<COMPANY_EMPLOYEE, CompanyEmployeeDto>().ReverseMap();
             //CreateMap<COMPANY_EMPLOYEE, CompanyEmployeeVM>().ReverseMap();
 
-  
 
 
+            CreateMap<PRODUCT, ProductDto>().ReverseMap();
             CreateMap<USER, RegisterDto>().ReverseMap();
             CreateMap<USER, JwtCustomClaims>()
                 .ForMember(dest => dest.UserId, opts => opts.MapFrom(src => src.Id))

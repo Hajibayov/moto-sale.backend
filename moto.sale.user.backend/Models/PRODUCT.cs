@@ -31,7 +31,7 @@ namespace moto.sale.user.backend.Models
         public int? Price { get; set; }
 
         [Column("image_url")]
-        public int? ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         [Column("created_at")]
         public DateTime? CreatedAt { get; set; }

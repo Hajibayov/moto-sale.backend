@@ -13,6 +13,8 @@ using Npgsql.Internal.TypeHandlers.NetworkHandlers;
 using billkill.payment.service.Models;
 using billkill.manager.backend.Services.Implementation;
 using motosale.user.backend.Extensions;
+using moto.sale.user.backend.Services.Implementation;
+using moto.sale.user.backend.Services.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +38,7 @@ builder.Services.AddTransient<IValidationCommon, ValidationCommon>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
-
+builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddDbContext<MotoSaleDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<USER, USER_ROLE>(options =>
 {
