@@ -39,6 +39,9 @@ builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+builder.Services.AddTransient<IBlogService, BlogService>();
+
 builder.Services.AddDbContext<MotoSaleDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<USER, USER_ROLE>(options =>
 {

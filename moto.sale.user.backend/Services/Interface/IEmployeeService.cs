@@ -11,5 +11,6 @@ namespace moto.sale.user.backend.Services.Interface
         Task<ResponseSimple> DeleteAsync(ResponseSimple response, int id);
         Task<EmployeeVM> GetByIdAsync(int id);
         Task<ResponseListTotal<EmployeeVM>> GetAll(ResponseListTotal<EmployeeVM> response, int page, int pageSize);
+
     }
 }

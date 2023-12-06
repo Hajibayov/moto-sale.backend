@@ -25,6 +25,10 @@ namespace motosale.user.backend.Extensions
             CreateMap<EMPLOYEE, EmployeeDto>().ReverseMap();
             CreateMap<EMPLOYEE, EmployeeVM>().ReverseMap();
 
+            CreateMap<BLOG, BlogDto>().ReverseMap();
+            CreateMap<BLOG, BlogVM>().ReverseMap();
+
+
             CreateMap<USER, RegisterDto>().ReverseMap();
             CreateMap<USER, JwtCustomClaims>()
                 .ForMember(dest => dest.UserId, opts => opts.MapFrom(src => src.Id))
