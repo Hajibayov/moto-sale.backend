@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using moto.sale.user.backend.DTO.RequestModels;
+using moto.sale.user.backend.DTO.ResponseModels.Inner;
 using moto.sale.user.backend.Models;
 using motosale.user.backend.DTO.HelperModels.Jwt;
 using motosale.user.backend.DTO.RequestModels;
@@ -19,6 +20,8 @@ namespace motosale.user.backend.Extensions
 
 
             CreateMap<PRODUCT, ProductDto>().ReverseMap();
+            CreateMap<PRODUCT, ProductVM>().ReverseMap();
+
             CreateMap<USER, RegisterDto>().ReverseMap();
             CreateMap<USER, JwtCustomClaims>()
                 .ForMember(dest => dest.UserId, opts => opts.MapFrom(src => src.Id))

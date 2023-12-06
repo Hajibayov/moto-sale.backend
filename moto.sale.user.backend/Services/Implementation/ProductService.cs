@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using moto.sale.user.backend.DTO.RequestModels;
+using moto.sale.user.backend.DTO.ResponseModels.Inner;
 using moto.sale.user.backend.Models;
 using moto.sale.user.backend.Services.Interface;
 using motosale.user.backend.DTO.HelperModels.Const;
@@ -51,5 +53,70 @@ namespace moto.sale.user.backend.Services.Implementation
             }
             return response;
         }
+
+        public async Task<ResponseSimple> UpdateAsync(ResponseSimple response, ProductDto model, int id)
+        {
+            try
+            {
+                var product = _mapper.Map<PRODUCT>(model);
+
+                var employeeDb = await _products.AllQuery
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Id == id);
+
+                product.Id = id;
+                product.UpdatedAt = DateTime.Now;
+                product.CreatedAt = employeeDb.CreatedAt;
+
+                _products.Update(product);
+                await _products.SaveAsync();
+                response.Status.Message = "Uğurla yeniləndi!";
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("TraceId: " + response.TraceID + $", {nameof(UpdateAsync)}: " + $"{e}");
+                response.Status.ErrorCode = ErrorCodes.DB;
+                response.Status.Message = "Problem baş verdi!";
+            }
+            return response;
+        }
+
+        public async Task<ResponseSimple> DeleteAsync(ResponseSimple response, int id)
+        {
+            try
+            {
+                var product = await _products.AllQuery.FirstOrDefaultAsync(x => x.Id == id);
+                _products.Remove(product);
+                await _products.SaveAsync();
+                response.Status.Message = "Uğurla silindi!";
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("TraceId: " + response.TraceID + $", {nameof(DeleteAsync)}: " + $"{e}");
+                response.Status.ErrorCode = ErrorCodes.DB;
+                response.Status.Message = "Problem baş verdi!";
+            }
+            return response;
+        }
+
+        public async Task<ProductVM> GetByIdAsync(int id)
+        {
+            var db_model = await _products.AllQuery.FirstOrDefaultAsync(x => x.Id == id);
+            return _mapper.Map<ProductVM>(db_model);
+        }
+
+        public async Task<ResponseListTotal<ProductVM>> GetAll(ResponseListTotal<ProductVM> response, int page, int pageSize)
+        {
+
+            var db_data = await _products.AllQuery.OrderByDescending(x => x.CreatedAt).ToListAsync();
+            response.Response.Total = db_data.Count;
+            db_data = db_data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            response.Response.Data = _mapper.Map<List<ProductVM>>(db_data);
+            return response;
+        }
+
+
+
+
     }
 }
