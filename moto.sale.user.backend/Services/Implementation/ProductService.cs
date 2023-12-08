@@ -4,6 +4,7 @@ using moto.sale.user.backend.DTO.RequestModels;
 using moto.sale.user.backend.DTO.ResponseModels.Inner;
 using moto.sale.user.backend.Models;
 using moto.sale.user.backend.Services.Interface;
+using motosale.user.backend.DTO.HelperModels;
 using motosale.user.backend.DTO.HelperModels.Const;
 using motosale.user.backend.DTO.RequestModels;
 using motosale.user.backend.DTO.ResponseModels.Main;
@@ -105,13 +106,20 @@ namespace moto.sale.user.backend.Services.Implementation
             return _mapper.Map<ProductVM>(db_model);
         }
 
-        public async Task<ResponseListTotal<ProductVM>> GetAll(ResponseListTotal<ProductVM> response, int page, int pageSize)
+        public ResponseTotal<PRODUCT> GetAll( CommonFilterVM filterVM)
         {
+            int recordsToSkip = (filterVM.Page - 1) * filterVM.PageSize;
 
-            var db_data = await _products.AllQuery.OrderByDescending(x => x.CreatedAt).ToListAsync();
-            response.Response.Total = db_data.Count;
-            db_data = db_data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            response.Response.Data = _mapper.Map<List<ProductVM>>(db_data);
+            var query = _products.AllQuery
+                .OrderByDescending(x => x.UpdatedAt != null ? x.UpdatedAt : x.CreatedAt);
+
+            var response = new ResponseTotal<PRODUCT>();
+            response.Total = query.Count();
+            response.Data = query
+                .Skip(recordsToSkip)
+                .Take(filterVM.PageSize)
+                .ToList();
+
             return response;
         }
 

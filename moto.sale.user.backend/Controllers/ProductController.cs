@@ -145,17 +145,17 @@ namespace moto.sale.user.backend.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("get-all")]
-        public async Task<IActionResult> GetAll(int page, int pageSize)
+        public IActionResult GetAll(CommonFilterVM filterVM)
         {
-            ResponseListTotal<ProductVM> response = new ResponseListTotal<ProductVM>();
-            response.Response = new ResponseTotal<ProductVM>();
+            ResponseListTotal<PRODUCT> response = new ResponseListTotal<PRODUCT>();
+            response.Response = new ResponseTotal<PRODUCT>();
             response.Status = new StatusModel();
             response.TraceID = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
             try
             {
-                response = await _productService.GetAll(response, page, pageSize);
+                response.Response =  _productService.GetAll(filterVM);
                 if (response.Response.Data == null)
                 {
                     response.Status.Message = "Məlumat tapılmadı!";

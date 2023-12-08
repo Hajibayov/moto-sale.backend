@@ -5,7 +5,6 @@ namespace moto.sale.user.backend.DTO.ResponseModels.Inner
 {
     public class ProductVM
     {
-        public int Id { get; set; }
 
         public string? Name { get; set; }
 
@@ -19,7 +18,5 @@ namespace moto.sale.user.backend.DTO.ResponseModels.Inner
 
         public int? Price { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public string? CreatedBy { get; set; }
-
     }
 }

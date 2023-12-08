@@ -7,6 +7,7 @@ namespace moto.sale.user.backend.DTO.RequestModels
         public string? Name { get; set; }
 
         public string? Description { get; set; }
+        public string? ImageUrl { get; set; }
 
         public int? BrandId { get; set; }
 
@@ -18,7 +19,6 @@ namespace moto.sale.user.backend.DTO.RequestModels
 
         public int? Price { get; set; }
 
-        public string? ImageUrl { get; set; }
 
     }
 }

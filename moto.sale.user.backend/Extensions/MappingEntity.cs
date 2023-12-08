@@ -20,7 +20,7 @@ namespace motosale.user.backend.Extensions
 
 
             CreateMap<PRODUCT, ProductDto>().ReverseMap();
-            CreateMap<PRODUCT, ProductVM>().ReverseMap();
+            CreateMap<PRODUCT, ProductVM>().ForMember(dest => dest.BrandId, opts => opts.MapFrom(src => src.Name)).ForMember(dest => dest.CategoryId, opts => opts.MapFrom(src => src.Name)).ReverseMap();
 
             CreateMap<EMPLOYEE, EmployeeDto>().ReverseMap();
             CreateMap<EMPLOYEE, EmployeeVM>().ReverseMap();
