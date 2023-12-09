@@ -11,7 +11,7 @@ namespace moto.sale.user.backend.Services.Interface
         Task<ResponseSimple> CreateAsync(ResponseSimple response, ProductDto model);
         Task<ResponseSimple> UpdateAsync(ResponseSimple response, ProductDto model, int id);
         Task<ResponseSimple> DeleteAsync(ResponseSimple response, int id);
-        Task<ProductVM> GetByIdAsync(int id);
-        ResponseTotal<PRODUCT> GetAll(CommonFilterVM filterVM);
+        Task<ProductDto> GetByIdAsync(int id);
+        ResponseListTotal<ProductVM> GetAll(ResponseListTotal<ProductVM> response, CommonFilterVM filterVM);
     }
 }

@@ -122,7 +122,7 @@ namespace moto.sale.user.backend.Controllers
         [Route("get-by-id")]
         public async Task<IActionResult> GetById(int id)
         {
-            ResponseObject<ProductVM> response = new ResponseObject<ProductVM>();
+            ResponseObject<ProductDto> response = new ResponseObject<ProductDto>();
             response.Status = new StatusModel();
             response.TraceID = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
             try
@@ -149,13 +149,13 @@ namespace moto.sale.user.backend.Controllers
         [Route("get-all")]
         public IActionResult GetAll(CommonFilterVM filterVM)
         {
-            ResponseListTotal<PRODUCT> response = new ResponseListTotal<PRODUCT>();
-            response.Response = new ResponseTotal<PRODUCT>();
+            ResponseListTotal<ProductVM> response = new ResponseListTotal<ProductVM>();
+            response.Response = new ResponseTotal<ProductVM>();
             response.Status = new StatusModel();
             response.TraceID = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
             try
             {
-                response.Response =  _productService.GetAll(filterVM);
+                response =  _productService.GetAll(response, filterVM);
                 if (response.Response.Data == null)
                 {
                     response.Status.Message = "Məlumat tapılmadı!";

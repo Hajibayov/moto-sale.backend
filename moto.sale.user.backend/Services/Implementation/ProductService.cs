@@ -10,6 +10,7 @@ using motosale.user.backend.DTO.RequestModels;
 using motosale.user.backend.DTO.ResponseModels.Main;
 using motosale.user.backend.Infrastructure.Repository;
 using motosale.user.backend.Services.Interface;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace moto.sale.user.backend.Services.Implementation
 {
@@ -100,31 +101,30 @@ namespace moto.sale.user.backend.Services.Implementation
             return response;
         }
 
-        public async Task<ProductVM> GetByIdAsync(int id)
+        public async Task<ProductDto> GetByIdAsync(int id)
         {
             var db_model = await _products.AllQuery.FirstOrDefaultAsync(x => x.Id == id);
-            return _mapper.Map<ProductVM>(db_model);
+            return _mapper.Map<ProductDto>(db_model);
         }
 
-        public ResponseTotal<PRODUCT> GetAll( CommonFilterVM filterVM)
+        public ResponseListTotal<ProductVM> GetAll(ResponseListTotal<ProductVM> response, CommonFilterVM filterVM)
         {
             int recordsToSkip = (filterVM.Page - 1) * filterVM.PageSize;
 
-            var query = _products.AllQuery
+            var query = _products.AllQuery.Include(x=>x.Category).Include(x=>x.Brand)
                 .OrderByDescending(x => x.UpdatedAt != null ? x.UpdatedAt : x.CreatedAt);
 
-            var response = new ResponseTotal<PRODUCT>();
-            response.Total = query.Count();
-            response.Data = query
+            response.Response.Total = query.Count();
+            var db_query = query
                 .Skip(recordsToSkip)
                 .Take(filterVM.PageSize)
                 .ToList();
+            response.Response.Data = _mapper.Map<List<ProductVM>>(db_query);
+
+           
+
 
             return response;
         }
-
-
-
-
     }
 }

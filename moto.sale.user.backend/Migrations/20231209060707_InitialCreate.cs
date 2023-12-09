@@ -12,8 +12,12 @@ namespace moto.sale.user.backend.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "students");
+
             migrationBuilder.CreateTable(
-                name: "blog",
+                name: "sh_blog",
+                schema: "students",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -28,11 +32,12 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_blog", x => x.id);
+                    table.PrimaryKey("PK_sh_blog", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "brand",
+                name: "sh_brand",
+                schema: "students",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -41,11 +46,12 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_brand", x => x.id);
+                    table.PrimaryKey("PK_sh_brand", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "category",
+                name: "sh_category",
+                schema: "students",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -54,11 +60,12 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_category", x => x.id);
+                    table.PrimaryKey("PK_sh_category", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "employee",
+                name: "sh_employee",
+                schema: "students",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -76,11 +83,12 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_employee", x => x.id);
+                    table.PrimaryKey("PK_sh_employee", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user",
+                name: "sh_user",
+                schema: "students",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -106,11 +114,12 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user", x => x.Id);
+                    table.PrimaryKey("PK_sh_user", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_role",
+                name: "sh_user_role",
+                schema: "students",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -125,11 +134,12 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_role", x => x.Id);
+                    table.PrimaryKey("PK_sh_user_role", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "product",
+                name: "sh_product",
+                schema: "students",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -141,7 +151,7 @@ namespace moto.sale.user.backend.Migrations
                     color = table.Column<string>(type: "text", nullable: true),
                     stock_quantity = table.Column<int>(type: "integer", nullable: true),
                     price = table.Column<int>(type: "integer", nullable: true),
-                    image_url = table.Column<int>(type: "integer", nullable: true),
+                    image_url = table.Column<string>(type: "text", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     created_by = table.Column<string>(type: "text", nullable: true),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -149,21 +159,24 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_product", x => x.id);
+                    table.PrimaryKey("PK_sh_product", x => x.id);
                     table.ForeignKey(
-                        name: "FK_product_brand_brand_id",
+                        name: "FK_sh_product_sh_brand_brand_id",
                         column: x => x.brand_id,
-                        principalTable: "brand",
+                        principalSchema: "students",
+                        principalTable: "sh_brand",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "FK_product_category_category_id",
+                        name: "FK_sh_product_sh_category_category_id",
                         column: x => x.category_id,
-                        principalTable: "category",
+                        principalSchema: "students",
+                        principalTable: "sh_category",
                         principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
+                schema: "students",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -176,15 +189,17 @@ namespace moto.sale.user.backend.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_user_UserId",
+                        name: "FK_AspNetUserClaims_sh_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalSchema: "students",
+                        principalTable: "sh_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
+                schema: "students",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
@@ -196,15 +211,17 @@ namespace moto.sale.user.backend.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_user_UserId",
+                        name: "FK_AspNetUserLogins_sh_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalSchema: "students",
+                        principalTable: "sh_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
+                schema: "students",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "integer", nullable: false),
@@ -216,15 +233,17 @@ namespace moto.sale.user.backend.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_user_UserId",
+                        name: "FK_AspNetUserTokens_sh_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalSchema: "students",
+                        principalTable: "sh_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "client",
+                name: "sh_client",
+                schema: "students",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -242,17 +261,19 @@ namespace moto.sale.user.backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_client", x => x.id);
+                    table.PrimaryKey("PK_sh_client", x => x.id);
                     table.ForeignKey(
-                        name: "FK_client_user_user_id",
+                        name: "FK_sh_client_sh_user_user_id",
                         column: x => x.user_id,
-                        principalTable: "user",
+                        principalSchema: "students",
+                        principalTable: "sh_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
+                schema: "students",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -265,15 +286,17 @@ namespace moto.sale.user.backend.Migrations
                 {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_user_role_RoleId",
+                        name: "FK_AspNetRoleClaims_sh_user_role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "user_role",
+                        principalSchema: "students",
+                        principalTable: "sh_user_role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
+                schema: "students",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "integer", nullable: false),
@@ -283,68 +306,80 @@ namespace moto.sale.user.backend.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_user_UserId",
+                        name: "FK_AspNetUserRoles_sh_user_UserId",
                         column: x => x.UserId,
-                        principalTable: "user",
+                        principalSchema: "students",
+                        principalTable: "sh_user",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_user_role_RoleId",
+                        name: "FK_AspNetUserRoles_sh_user_role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "user_role",
+                        principalSchema: "students",
+                        principalTable: "sh_user_role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
+                schema: "students",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
+                schema: "students",
                 table: "AspNetUserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserLogins_UserId",
+                schema: "students",
                 table: "AspNetUserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_RoleId",
+                schema: "students",
                 table: "AspNetUserRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_client_user_id",
-                table: "client",
+                name: "IX_sh_client_user_id",
+                schema: "students",
+                table: "sh_client",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_product_brand_id",
-                table: "product",
+                name: "IX_sh_product_brand_id",
+                schema: "students",
+                table: "sh_product",
                 column: "brand_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_product_category_id",
-                table: "product",
+                name: "IX_sh_product_category_id",
+                schema: "students",
+                table: "sh_product",
                 column: "category_id");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                table: "user",
+                schema: "students",
+                table: "sh_user",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                table: "user",
+                schema: "students",
+                table: "sh_user",
                 column: "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                table: "user_role",
+                schema: "students",
+                table: "sh_user_role",
                 column: "NormalizedName",
                 unique: true);
         }
@@ -353,43 +388,56 @@ namespace moto.sale.user.backend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
+                name: "AspNetRoleClaims",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
+                name: "AspNetUserClaims",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
+                name: "AspNetUserLogins",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
+                name: "AspNetUserRoles",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
+                name: "AspNetUserTokens",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "blog");
+                name: "sh_blog",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "client");
+                name: "sh_client",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "employee");
+                name: "sh_employee",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "product");
+                name: "sh_product",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "user_role");
+                name: "sh_user_role",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "user");
+                name: "sh_user",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "brand");
+                name: "sh_brand",
+                schema: "students");
 
             migrationBuilder.DropTable(
-                name: "category");
+                name: "sh_category",
+                schema: "students");
         }
     }
 }

@@ -12,7 +12,7 @@ using motosale.user.backend.Infrastructure;
 namespace moto.sale.user.backend.Migrations
 {
     [DbContext(typeof(MotoSaleDbContext))]
-    [Migration("20231205141243_InitialCreate")]
+    [Migration("20231209060707_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,6 +20,7 @@ namespace moto.sale.user.backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("students")
                 .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -46,7 +47,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("AspNetRoleClaims", "students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -70,7 +71,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("AspNetUserClaims", "students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
@@ -91,7 +92,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("AspNetUserLogins", "students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
@@ -106,7 +107,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("AspNetUserRoles", "students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -125,7 +126,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("AspNetUserTokens", "students");
                 });
 
             modelBuilder.Entity("billkill.payment.service.Models.USER_ROLE", b =>
@@ -170,7 +171,7 @@ namespace moto.sale.user.backend.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("user_role", (string)null);
+                    b.ToTable("sh_user_role", "students");
                 });
 
             modelBuilder.Entity("moto.sale.user.backend.Models.BLOG", b =>
@@ -212,7 +213,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("blog");
+                    b.ToTable("sh_blog", "students");
                 });
 
             modelBuilder.Entity("moto.sale.user.backend.Models.CATEGORY", b =>
@@ -230,7 +231,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("category");
+                    b.ToTable("sh_category", "students");
                 });
 
             modelBuilder.Entity("moto.sale.user.backend.Models.EMPLOYEE", b =>
@@ -284,7 +285,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("employee");
+                    b.ToTable("sh_employee", "students");
                 });
 
             modelBuilder.Entity("moto.sale.user.backend.Models.PRODUCT", b =>
@@ -320,8 +321,8 @@ namespace moto.sale.user.backend.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<int?>("ImageUrl")
-                        .HasColumnType("integer")
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text")
                         .HasColumnName("image_url");
 
                     b.Property<string>("Name")
@@ -350,7 +351,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("product");
+                    b.ToTable("sh_product", "students");
                 });
 
             modelBuilder.Entity("motosale.user.backend.Models.BRAND", b =>
@@ -368,7 +369,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("brand");
+                    b.ToTable("sh_brand", "students");
                 });
 
             modelBuilder.Entity("motosale.user.backend.Models.CLIENT", b =>
@@ -428,7 +429,7 @@ namespace moto.sale.user.backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("client");
+                    b.ToTable("sh_client", "students");
                 });
 
             modelBuilder.Entity("motosale.user.backend.Models.USER", b =>
@@ -507,7 +508,7 @@ namespace moto.sale.user.backend.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("user", (string)null);
+                    b.ToTable("sh_user", "students");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
