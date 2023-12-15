@@ -19,8 +19,7 @@ namespace motosale.user.backend.Extensions
 
 
 
-            CreateMap<PRODUCT, ProductDto>().ForMember(dest => dest.Brand, opts => opts.MapFrom(src => src.Brand.Name))
-                .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.Name)).ReverseMap(); ;
+            CreateMap<PRODUCT, ProductDto>().ReverseMap(); ;
             CreateMap<PRODUCT, ProductVM>()
                 .ForMember(dest => dest.Brand, opts => opts.MapFrom(src => src.Brand.Name))
                 .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.Name)).ReverseMap();
@@ -30,6 +29,9 @@ namespace motosale.user.backend.Extensions
 
             CreateMap<BLOG, BlogDto>().ReverseMap();
             CreateMap<BLOG, BlogVM>().ReverseMap();
+
+            CreateMap<BRAND, BrandVM>().ReverseMap();
+            CreateMap<CATEGORY, CategoryVM>().ReverseMap();
 
 
             CreateMap<USER, RegisterDto>().ReverseMap();

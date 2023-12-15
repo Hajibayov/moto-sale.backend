@@ -9,9 +9,9 @@ namespace moto.sale.user.backend.DTO.RequestModels
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
 
-        public string? Brand { get; set; }
+        public int? BrandId { get; set; }
 
-        public string? Category { get; set; }
+        public int? CategoryId { get; set; }
 
         public string? Color { get; set; }
 
