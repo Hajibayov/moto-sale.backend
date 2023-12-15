@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\moto.sale.user.backend.props" />
+</Project>
